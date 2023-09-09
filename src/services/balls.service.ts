@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Combination } from 'src/types/combination';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BallsService {
+  private _winCombination?: number[] = this.randomizeBalls(6);
+
   constructor() {}
 
   public randomizeBalls(length: number): number[] {
@@ -19,5 +22,19 @@ export class BallsService {
     return result;
   }
 
-  public countMatchAmount() {}
+  public countMatchAmount(playerBalls: number[]): Combination {
+    const bonusBall = this._winCombination?.pop();
+    let matchCount = 0;
+    let hasBonus = false;
+
+    for (let ball of playerBalls) {
+      if (this._winCombination?.includes(ball)) {
+        matchCount++;
+      } else if (!hasBonus && ball === bonusBall) {
+        hasBonus = true;
+      }
+    }
+
+    return { matchCount, hasBonus };
+  }
 }

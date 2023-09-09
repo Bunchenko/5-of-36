@@ -7,8 +7,6 @@ import { Combination } from 'src/types/combination';
 export class PrizeService {
   private _prizePool = 1000000;
 
-  constructor() {}
-
   public countPrize(combination: Combination) {
     if (combination.hasBonus) {
       switch (combination.matchCount) {
