@@ -8,6 +8,9 @@
       "schematics": {
         "@schematics/angular:service": {
           "path": "src/services"
+        },
+        "@schematics/angular:interface": {
+          "path": "src/types"
         }
       },
       "root": "",
