@@ -2,6 +2,6 @@
 <a [routerLink]="'/game'">Game</a>
 <a [routerLink]="'/drawing'">Drawing</a>
 <app-card [elemStyles]="{display: 'flex', alignItems: 'center', flexDirection: 'column'}">
-	<div class="time">{{drawingService.time | mmss}}</div>
+	<div class="time">{{(drawingService.time | async) ?? 0 | mmss}}</div>
 </app-card>
 <router-outlet></router-outlet>

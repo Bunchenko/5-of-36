@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Observable, interval, Subject } from 'rxjs';
-import { take, takeUntil, map, tap, shareReplay } from 'rxjs/operators';
+import { Observable, interval, Subject, BehaviorSubject } from 'rxjs';
+import {
+  take,
+  takeUntil,
+  map,
+  tap,
+  shareReplay,
+  finalize,
+} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +15,7 @@ import { take, takeUntil, map, tap, shareReplay } from 'rxjs/operators';
 export class DrawingService {
   public timer$?: Observable<number>;
   public complete = new Subject<boolean>();
-  public time = 0;
+  public time = new BehaviorSubject<number>(0);
   private _seconds = 60;
 
   constructor() {
@@ -17,9 +24,12 @@ export class DrawingService {
       takeUntil(this.complete),
       take(this._seconds + 1),
       tap((v) => {
-        this.time = this._seconds - v;
+        this.time.next(this._seconds - v);
       }),
-      map((v) => this._seconds - v)
+      map((v) => this._seconds - v),
+      finalize(() => {
+        this.time.next(0);
+      })
     );
   }
 }

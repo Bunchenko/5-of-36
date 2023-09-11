@@ -19,7 +19,6 @@ export class AppComponent implements OnInit {
     this.drawingService.timer$?.subscribe({
       next: (v) => {},
       complete: () => {
-        this.drawingService.time = 0;
         console.log('Complete!!!');
       },
     });
