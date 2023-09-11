@@ -1,1 +1,7 @@
 <h1>Hello app</h1>
+<a [routerLink]="'/game'">Game</a>
+<a [routerLink]="'/drawing'">Drawing</a>
+<app-card [elemStyles]="{display: 'flex', alignItems: 'center', flexDirection: 'column'}">
+	<div class="time">{{drawingService.time | mmss}}</div>
+</app-card>
+<router-outlet></router-outlet>
