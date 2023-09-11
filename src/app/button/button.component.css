@@ -1,0 +1,41 @@
+button {
+  display: inline-block;
+  min-width: 178px;
+  padding: 14px 10px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 3px;
+  box-shadow: 0 1px 8px 0 #ccc;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: 0.16px;
+  line-height: 18px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #173a71;
+  color: #fffffe;
+}
+
+.secondary {
+  background-color: #e46b2a;
+  color: #fff;
+}
+
+.secondary:hover {
+  background-color: #173a71;
+}
+
+.primary {
+  border-color: #ac8f60;
+  background-color: #fffffe;
+  color: #ac8f60;
+}
+
+.primary:hover {
+  background: #ac8f60;
+  color: #fffffe;
+}
