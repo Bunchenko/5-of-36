@@ -10,6 +10,7 @@ import { DropdownComponent } from './dropdown/dropdown.component';
 import { TotalComponent } from './total/total.component';
 import { ButtonComponent } from './button/button.component';
 import { DrawingComponent } from './drawing/drawing.component';
+import { MmssPipe } from 'src/pipes/mmss.pipe';
 
 @NgModule({
   declarations: [
@@ -20,13 +21,11 @@ import { DrawingComponent } from './drawing/drawing.component';
     DropdownComponent,
     TotalComponent,
     ButtonComponent,
-    DrawingComponent
+    DrawingComponent,
+    MmssPipe,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -11,6 +11,9 @@
         },
         "@schematics/angular:interface": {
           "path": "src/types"
+        },
+        "@schematics/angular:pipe": {
+          "path": "src/pipes"
         }
       },
       "root": "",
