@@ -1,0 +1,7 @@
+.wrapper {
+  padding: 20px;
+  border: 1px solid #ac8f60;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #fff;
+}
