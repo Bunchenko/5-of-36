@@ -9,40 +9,45 @@ export class PrizeService {
   public prizes$ = new Subject<number>();
   private _prizePool = 1000000;
 
-  public countPrize(combination: Combination) {
-    if (combination.hasBonus) {
-      switch (combination.matchCount) {
-        case 2:
-          this.prizes$.next(Math.round(this._prizePool * 0.2));
-          break;
-        case 3:
-          this.prizes$.next(Math.round(this._prizePool * 0.4));
-          break;
-        case 4:
-          this.prizes$.next(Math.round(this._prizePool * 0.8));
-          break;
-        default:
-          this.prizes$.next(0);
-          break;
+  public countTotalPrize(combinations: Combination[]) {
+    let totalWin = 0;
+
+    combinations.forEach((combination) => {
+      if (combination.hasBonus) {
+        totalWin += this._calculateWithBonus(combination.matchCount);
+      } else {
+        totalWin += this._calculateWithoutBonus(combination.matchCount);
       }
-    } else {
-      switch (combination.matchCount) {
-        case 2:
-          this.prizes$.next(Math.round(this._prizePool * 0.1));
-          break;
-        case 3:
-          this.prizes$.next(Math.round(this._prizePool * 0.3));
-          break;
-        case 4:
-          this.prizes$.next(Math.round(this._prizePool * 0.7));
-          break;
-        case 5:
-          this.prizes$.next(this._prizePool);
-          break;
-        default:
-          this.prizes$.next(0);
-          break;
-      }
+    });
+
+    this.prizes$.next(totalWin);
+  }
+
+  private _calculateWithBonus(matchCount: number) {
+    switch (matchCount) {
+      case 2:
+        return Math.round(this._prizePool * 0.2);
+      case 3:
+        return Math.round(this._prizePool * 0.4);
+      case 4:
+        return Math.round(this._prizePool * 0.6);
+      default:
+        return 0;
+    }
+  }
+
+  private _calculateWithoutBonus(matchCount: number) {
+    switch (matchCount) {
+      case 2:
+        return Math.round(this._prizePool * 0.1);
+      case 3:
+        return Math.round(this._prizePool * 0.3);
+      case 4:
+        return Math.round(this._prizePool * 0.5);
+      case 5:
+        return this._prizePool * 7;
+      default:
+        return 0;
     }
   }
 }

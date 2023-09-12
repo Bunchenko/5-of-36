@@ -7,18 +7,23 @@ import { DrawingService } from './drawing.service';
   providedIn: 'root',
 })
 export class BallsService {
-  public playerCombination: number[] = this.randomizeBalls(5); //TODO
+  public playerCombinations: number[][] = [[], [], [], [], [], [], [], []]; //TODO
   private _winCombination?: number[];
 
   constructor(
     private _prizeService: PrizeService,
     private _drawingService: DrawingService
   ) {
+    //TODO: create methods to manually add, remove arrays
+    this.playerCombinations = this.playerCombinations.map((arr) =>
+      this.randomizeBalls(5)
+    );
+
     _drawingService.timer$.subscribe({
       complete: () => {
         this._winCombination = this.randomizeBalls(6);
-        const combination = this._countMatchAmount(this.playerCombination);
-        _prizeService.countPrize(combination);
+        const combinations = this._countMatchAmount();
+        _prizeService.countTotalPrize(combinations);
       },
     });
   }
@@ -36,19 +41,24 @@ export class BallsService {
     return result;
   }
 
-  private _countMatchAmount(playerCombination: number[]): Combination {
+  private _countMatchAmount(): Combination[] {
     const bonusBall = this._winCombination?.pop();
-    let matchCount = 0;
-    let hasBonus = false;
 
-    for (let ball of playerCombination) {
-      if (this._winCombination?.includes(ball)) {
-        matchCount++;
-      } else if (!hasBonus && ball === bonusBall) {
-        hasBonus = true;
+    const combinations = this.playerCombinations.map((playerCombination) => {
+      let matchCount = 0;
+      let hasBonus = false;
+
+      for (let ball of playerCombination) {
+        if (this._winCombination?.includes(ball)) {
+          matchCount++;
+        } else if (!hasBonus && ball === bonusBall) {
+          hasBonus = true;
+        }
       }
-    }
 
-    return { matchCount, hasBonus };
+      return { matchCount, hasBonus };
+    });
+
+    return combinations;
   }
 }
