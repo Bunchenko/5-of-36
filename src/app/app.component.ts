@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.drawingService.timer$?.subscribe({
+    this.drawingService.timer$.subscribe({
       next: (v) => {},
       complete: () => {
         console.log('Complete!!!');

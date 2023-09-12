@@ -11,6 +11,7 @@ import { TotalComponent } from './total/total.component';
 import { ButtonComponent } from './button/button.component';
 import { DrawingComponent } from './drawing/drawing.component';
 import { MmssPipe } from 'src/pipes/mmss.pipe';
+import { ToastComponent } from './toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { MmssPipe } from 'src/pipes/mmss.pipe';
     ButtonComponent,
     DrawingComponent,
     MmssPipe,
+    ToastComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
