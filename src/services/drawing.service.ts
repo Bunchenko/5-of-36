@@ -13,7 +13,7 @@ import {
   providedIn: 'root',
 })
 export class DrawingService {
-  public timer$?: Observable<number>;
+  public timer$: Observable<number>;
   public complete$ = new Subject<boolean>();
   public time$ = new BehaviorSubject<number>(0);
   private _seconds = 60;

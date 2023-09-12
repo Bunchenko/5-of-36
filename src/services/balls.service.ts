@@ -14,11 +14,11 @@ export class BallsService {
     private _prizeService: PrizeService,
     private _drawingService: DrawingService
   ) {
-    _drawingService.timer$?.subscribe({
+    _drawingService.timer$.subscribe({
       complete: () => {
         this._winCombination = this.randomizeBalls(6);
         const combination = this._countMatchAmount(this.playerCombination);
-        console.log(_prizeService.countPrize(combination));
+        _prizeService.countPrize(combination);
       },
     });
   }
