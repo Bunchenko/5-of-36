@@ -14,11 +14,6 @@ export class BallsService {
     private _prizeService: PrizeService,
     private _drawingService: DrawingService
   ) {
-    //TODO: create methods to manually add, remove arrays
-    this.playerCombinations = this.playerCombinations.map((arr) =>
-      this.randomizeBalls(5)
-    );
-
     _drawingService.timer$.subscribe({
       complete: () => {
         this._winCombination = this.randomizeBalls(6);
@@ -39,6 +34,14 @@ export class BallsService {
     }
 
     return result;
+  }
+
+  public addBalls(balls: number[], index: number): void {
+    this.playerCombinations[index] = balls;
+  }
+
+  public removeBalls(index: number): void {
+    this.playerCombinations[index] = [];
   }
 
   private _countMatchAmount(): Combination[] {
