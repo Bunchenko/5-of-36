@@ -5,6 +5,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { filter } from 'rxjs/operators';
 import { PrizeService } from 'src/services/prize.service';
 
 @Component({
@@ -25,17 +26,19 @@ export class ToastComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this._prizeService.prizes$.subscribe((prize) => {
-      this.message = `You won: ${prize}$`;
-      this._visible = true;
+    this._prizeService.prizes$
+      .pipe(filter((v) => v !== null))
+      .subscribe((prize) => {
+        this.message = `You won: ${prize}$`;
+        this._visible = true;
 
-      this._cd.markForCheck();
-
-      setTimeout(() => {
-        this.message = '';
-        this._visible = false;
         this._cd.markForCheck();
-      }, this.duration);
-    });
+
+        setTimeout(() => {
+          this.message = '';
+          this._visible = false;
+          this._cd.markForCheck();
+        }, this.duration);
+      });
   }
 }
