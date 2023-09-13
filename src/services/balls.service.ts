@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { Combination } from 'src/types/combination';
 import { PrizeService } from './prize.service';
 import { DrawingService } from './drawing.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BallsService {
   public playerCombinations: number[][] = [[], [], [], [], [], [], [], []]; //TODO
-  private _winCombination?: number[];
+  public winCombination$ = new BehaviorSubject<number[]>([]);
 
   constructor(
     private _prizeService: PrizeService,
@@ -16,7 +17,7 @@ export class BallsService {
   ) {
     _drawingService.timer$.subscribe({
       complete: () => {
-        this._winCombination = this.randomizeBalls(6);
+        this.winCombination$.next(this.randomizeBalls(6));
         const combinations = this._countMatchAmount();
         _prizeService.countTotalPrize(combinations);
       },
@@ -45,14 +46,15 @@ export class BallsService {
   }
 
   private _countMatchAmount(): Combination[] {
-    const bonusBall = this._winCombination?.pop();
+    const winCombination = [...this.winCombination$.value];
+    const bonusBall = winCombination.pop();
 
     const combinations = this.playerCombinations.map((playerCombination) => {
       let matchCount = 0;
       let hasBonus = false;
 
       for (let ball of playerCombination) {
-        if (this._winCombination?.includes(ball)) {
+        if (winCombination.includes(ball)) {
           matchCount++;
         } else if (!hasBonus && ball === bonusBall) {
           hasBonus = true;

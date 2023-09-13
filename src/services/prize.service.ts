@@ -1,4 +1,4 @@
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Combination } from 'src/types/combination';
 
@@ -6,7 +6,7 @@ import { Combination } from 'src/types/combination';
   providedIn: 'root',
 })
 export class PrizeService {
-  public prizes$ = new Subject<number>();
+  public prizes$ = new BehaviorSubject<number | null>(null);
   private _prizePool = 1000000;
 
   public countTotalPrize(combinations: Combination[]) {
