@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ball {
+  margin-right: 5px;
+}
+
+.ball-last {
+  font-weight: bold;
+}

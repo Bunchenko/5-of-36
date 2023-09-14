@@ -1,1 +1,32 @@
 <app-button [customClass]="['primary']" (click)="onClick()">Stop</app-button>
+
+<h2>Your combinations</h2>
+
+<div *ngFor="let combinations of _ballsService.playerCombinations; trackBy: trackByCombinationFn">
+	<div>
+		<span class="ball" *ngFor="let ball of combinations; trackBy: trackByBallFn">{{ball}}</span>
+	</div>
+</div>
+
+
+<h2>Winning combination</h2>
+<div *ngIf="(_ballsService.winCombination$ | async)?.length; else notAnnounced">
+	<ng-container *ngFor="let ball of _ballsService.winCombination$ | async; let isLast = last; trackBy: trackByBallFn">
+		<span class="ball" [ngClass]="{'ball-last': isLast}">
+			{{ball}}
+		</span>
+	</ng-container>
+</div>
+
+<h2>Your prize:</h2>
+<ng-container *ngIf="(_prizeService.prizes$ | async) !== null as prize; else wait">
+	<p>{{(_prizeService.prizes$ | async) | currency}}</p>
+</ng-container>
+
+<ng-template #notAnnounced>
+	<p>The winning combination is not announced yet!</p>
+</ng-template>
+
+<ng-template #wait>
+	<p>Wait until the winning combination is announced!</p>
+</ng-template>
