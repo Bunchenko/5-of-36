@@ -1,0 +1,59 @@
+.lotto-ball {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: normal;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #ac8f60;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  user-select: none;
+  cursor: pointer;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease-in-out;
+  border: 3px solid transparent;
+  outline: none;
+  padding: 0;
+}
+
+.lotto-ball:hover {
+  background-color: #b9a073;
+}
+
+.bonus-ball {
+  background-color: #fff;
+  border: 3px solid #ac8f60;
+  color: #ac8f60;
+}
+
+.bonus-ball:hover {
+  background-color: #f5f5f5;
+}
+
+.lotto-ball:focus {
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #ac8f60;
+}
+
+.lotto-ball:disabled {
+  background-color: #d6c5b1;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.7;
+}
+
+.lotto-ball.bonus-ball:disabled {
+  background-color: #f0e9df;
+  border-color: #d6c5b1;
+  color: #d6c5b1;
+}
+
+.lotto-ball:disabled:hover {
+  background-color: #d6c5b1;
+}
+
+.lotto-ball.bonus-ball:disabled:hover {
+  background-color: #f0e9df;
+}
