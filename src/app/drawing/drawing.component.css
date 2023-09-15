@@ -8,6 +8,6 @@
   margin-right: 5px;
 }
 
-.ball-last {
-  font-weight: bold;
+.balls-container {
+  display: flex;
 }

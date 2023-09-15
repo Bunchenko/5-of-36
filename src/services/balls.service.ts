@@ -45,7 +45,15 @@ export class BallsService {
     this.playerCombinations[index] = [];
   }
 
-  private _countMatchAmount(): Combination[] {
+  public arePlayerCombinationsEmpty(): boolean {
+    return this.playerCombinations.every(
+      (combination) => combination.length === 0
+    );
+  }
+
+  private _countMatchAmount(): Combination[] | null {
+    if (this.arePlayerCombinationsEmpty()) return null;
+
     const winCombination = [...this.winCombination$.value];
     const bonusBall = winCombination.pop();
 

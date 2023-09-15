@@ -9,7 +9,9 @@ export class PrizeService {
   public prizes$ = new BehaviorSubject<number | null>(null);
   private _prizePool = 1000000;
 
-  public countTotalPrize(combinations: Combination[]) {
+  public countTotalPrize(combinations: Combination[] | null) {
+    if (!combinations) return;
+
     let totalWin = 0;
 
     combinations.forEach((combination) => {

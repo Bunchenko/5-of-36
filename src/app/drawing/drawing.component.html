@@ -2,19 +2,20 @@
 
 <h2>Your combinations</h2>
 
-<div *ngFor="let combinations of _ballsService.playerCombinations; trackBy: trackByCombinationFn">
-	<div>
-		<span class="ball" *ngFor="let ball of combinations; trackBy: trackByBallFn">{{ball}}</span>
+<ng-container *ngIf="!_ballsService.arePlayerCombinationsEmpty(); else combinationsEmpty">
+	<div class="balls-container"
+		*ngFor="let combinations of _ballsService.playerCombinations; trackBy: trackByCombinationFn">
+		<app-ball class="ball" *ngFor="let ball of combinations; trackBy: trackByBallFn">{{ball}}</app-ball>
 	</div>
-</div>
+</ng-container>
 
 
 <h2>Winning combination</h2>
-<div *ngIf="(_ballsService.winCombination$ | async)?.length; else notAnnounced">
+<div class="balls-container" *ngIf="(_ballsService.winCombination$ | async)?.length; else notAnnounced">
 	<ng-container *ngFor="let ball of _ballsService.winCombination$ | async; let isLast = last; trackBy: trackByBallFn">
-		<span class="ball" [ngClass]="{'ball-last': isLast}">
+		<app-ball class="ball" [type]="isLast ? 'bonus' : 'normal'">
 			{{ball}}
-		</span>
+		</app-ball>
 	</ng-container>
 </div>
 
@@ -29,4 +30,8 @@
 
 <ng-template #wait>
 	<p>Wait until the winning combination is announced!</p>
+</ng-template>
+
+<ng-template #combinationsEmpty>
+	<p>Choose your combinations to join the game!</p>
 </ng-template>
