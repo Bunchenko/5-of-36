@@ -13,6 +13,7 @@ import { DrawingComponent } from './drawing/drawing.component';
 import { MmssPipe } from 'src/pipes/mmss.pipe';
 import { ToastComponent } from './toast/toast.component';
 import { BallComponent } from './ball/ball.component';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { BallComponent } from './ball/ball.component';
     MmssPipe,
     ToastComponent,
     BallComponent,
+    ModalComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
