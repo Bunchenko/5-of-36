@@ -23,8 +23,4 @@ export class AppComponent implements OnInit {
       },
     });
   }
-
-  onClick() {
-    this.drawingService.complete$.next(true);
-  }
 }
