@@ -1,9 +1,16 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import {
+  Component,
+  Output,
+  EventEmitter,
+  Input,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 
 @Component({
   selector: 'app-ball',
   templateUrl: './ball.component.html',
   styleUrls: ['./ball.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BallComponent {
   @Input() type: 'normal' | 'bonus' = 'normal';
