@@ -15,15 +15,18 @@ export class DrawingComponent {
     protected _prizeService: PrizeService
   ) {}
 
-  onClick() {
+  protected _stopDrawing() {
     this._drawingService.complete$.next(true);
   }
 
-  trackByCombinationFn(index: number, combination: number[]): number {
+  protected _trackByCombinationFn(
+    index: number,
+    combination: number[]
+  ): number {
     return index;
   }
 
-  trackByBallFn(index: number, ball: number): number {
+  protected _trackByBallFn(index: number, ball: number): number {
     return ball;
   }
 }

@@ -10,11 +10,11 @@ export class BallComponent {
   @Input() isDisabled: boolean = false;
   @Output() ballClick = new EventEmitter<void>();
 
-  handleClick() {
+  protected _handleClick() {
     this.ballClick.emit();
   }
 
-  defineBallClass() {
+  protected _defineBallClass() {
     return {
       'lotto-ball': true,
       'bonus-ball': this.type === 'bonus',

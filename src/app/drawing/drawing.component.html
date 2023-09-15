@@ -1,18 +1,19 @@
-<app-button [customClass]="['primary']" (click)="onClick()">Stop</app-button>
+<app-button [customClass]="['primary']" (click)="_stopDrawing()">Stop</app-button>
 
 <h2>Your combinations</h2>
 
 <ng-container *ngIf="!_ballsService.arePlayerCombinationsEmpty(); else combinationsEmpty">
 	<div class="balls-container"
-		*ngFor="let combinations of _ballsService.playerCombinations; trackBy: trackByCombinationFn">
-		<app-ball class="ball" *ngFor="let ball of combinations; trackBy: trackByBallFn">{{ball}}</app-ball>
+		*ngFor="let combinations of _ballsService.playerCombinations; trackBy: _trackByCombinationFn">
+		<app-ball class="ball" *ngFor="let ball of combinations; trackBy: _trackByBallFn">{{ball}}</app-ball>
 	</div>
 </ng-container>
 
 
 <h2>Winning combination</h2>
 <div class="balls-container" *ngIf="(_ballsService.winCombination$ | async)?.length; else notAnnounced">
-	<ng-container *ngFor="let ball of _ballsService.winCombination$ | async; let isLast = last; trackBy: trackByBallFn">
+	<ng-container
+		*ngFor="let ball of _ballsService.winCombination$ | async; let isLast = last; trackBy: _trackByBallFn">
 		<app-ball class="ball" [type]="isLast ? 'bonus' : 'normal'">
 			{{ball}}
 		</app-ball>
