@@ -1,4 +1,4 @@
-<app-button [customClass]="['primary']" (click)="_stopDrawing()">Stop</app-button>
+<app-button [customClass]="'primary'" (click)="_stopDrawing()">Stop</app-button>
 
 <h2>Your combinations:</h2>
 <ng-container *ngIf="!_ballsService.arePlayerCombinationsEmpty(); else combinationsEmpty">

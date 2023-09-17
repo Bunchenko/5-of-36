@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./button.component.css'],
 })
 export class ButtonComponent {
-  @Input() customClass: string[] = [];
+  @Input() customClass?: 'primary' | 'secondary' | 'danger';
   @Input() customStyles: { [key: string]: string } = {};
   @Output() onClick = new EventEmitter<MouseEvent>();
 }

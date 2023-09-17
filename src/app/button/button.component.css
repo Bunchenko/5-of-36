@@ -39,3 +39,14 @@ button:hover {
   background: #ac8f60;
   color: #fffffe;
 }
+
+.danger {
+  border-color: #e74c3c;
+  background-color: #fff;
+  color: #e74c3c;
+}
+
+.danger:hover {
+  background-color: #e74c3c;
+  color: #fff;
+}
