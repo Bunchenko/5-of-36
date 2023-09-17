@@ -1,0 +1,14 @@
+.game {
+  display: flex;
+}
+
+.balls-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.balls-grid {
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: repeat(10, 50px);
+}
