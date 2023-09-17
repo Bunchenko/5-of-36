@@ -8,13 +8,13 @@ import { BallsService } from 'src/services/balls.service';
 })
 export class GameComponent {
   protected _showModal = false;
-  protected _currentRowIndex: number | null = null;
+  protected _modalRowIndex: number | null = null;
 
   constructor(protected _ballsService: BallsService) {}
 
   protected _onModalOpen(index: number): void {
     this._showModal = true;
-    this._currentRowIndex = index;
+    this._modalRowIndex = index;
     this._ballsService.bufferCombination = [
       ...this._ballsService.playerCombinations[index],
     ];
@@ -24,14 +24,15 @@ export class GameComponent {
     this._showModal = false;
     if (
       this._ballsService.bufferCombination.length === 5 &&
-      this._currentRowIndex !== null
+      this._modalRowIndex !== null
     ) {
       this._ballsService.addBalls(
         this._ballsService.bufferCombination,
-        this._currentRowIndex
+        this._modalRowIndex
       );
     }
     this._ballsService.bufferCombination = [];
+    this._modalRowIndex = null;
   }
 
   protected _chooseBallType(ball: number): {
@@ -57,5 +58,13 @@ export class GameComponent {
       if (buffer.length >= 5) return;
       buffer.push(ball);
     }
+  }
+
+  protected _autoselect(index: number): void {
+    this._ballsService.addBalls(this._ballsService.randomizeBalls(5), index);
+  }
+
+  protected _remove(index: number): void {
+    this._ballsService.removeBalls(index);
   }
 }

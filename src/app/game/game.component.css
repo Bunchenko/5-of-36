@@ -2,6 +2,10 @@
   display: flex;
 }
 
+.row {
+  display: flex;
+}
+
 .balls-row {
   display: flex;
   justify-content: space-between;
