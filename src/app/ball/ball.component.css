@@ -7,10 +7,11 @@
   height: 50px;
   border-radius: 50%;
   background-color: #fff;
-  border: 3px solid #ac8f60;
+  border: 1px solid #ac8f60;
   color: #ac8f60;
 
-  font-weight: bold;
+  font-weight: 700;
+  font-size: 18px;
   text-align: center;
   user-select: none;
   cursor: pointer;
@@ -26,7 +27,7 @@
 
 .bonus-ball {
   background-color: #ac8f60;
-  border: 3px solid transparent;
+  border: 1px solid transparent;
   color: white;
 }
 
