@@ -7,6 +7,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ModalComponent {
   @Input() title: string = '';
+  @Input() isOpened: boolean = false;
   @Output() closed = new EventEmitter();
 
   protected _close() {
