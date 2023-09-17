@@ -1,7 +1,6 @@
 <app-button [customClass]="['primary']" (click)="_stopDrawing()">Stop</app-button>
 
-<h2>Your combinations</h2>
-
+<h2>Your combinations:</h2>
 <ng-container *ngIf="!_ballsService.arePlayerCombinationsEmpty(); else combinationsEmpty">
 	<div class="balls-container"
 		*ngFor="let combinations of _ballsService.playerCombinations; trackBy: _trackByCombinationFn">
@@ -10,7 +9,7 @@
 </ng-container>
 
 
-<h2>Winning combination</h2>
+<h2>Winning combination:</h2>
 <div class="balls-container" *ngIf="(_ballsService.winCombination$ | async)?.length; else notAnnounced">
 	<ng-container
 		*ngFor="let ball of _ballsService.winCombination$ | async; let isLast = last; trackBy: _trackByBallFn">
