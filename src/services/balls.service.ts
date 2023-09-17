@@ -8,8 +8,13 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class BallsService {
-  public playerCombinations: number[][] = [[], [], [], [], [], [], [], []]; //TODO
+  public availableNumbers: number[] = Array.from(
+    { length: 36 },
+    (_, i) => i + 1
+  );
+  public playerCombinations: number[][] = [[], [], [], [], [], [], [], []];
   public winCombination$ = new BehaviorSubject<number[]>([]);
+  public bufferCombination: number[] = [];
 
   constructor(
     private _prizeService: PrizeService,
@@ -25,7 +30,7 @@ export class BallsService {
   }
 
   public randomizeBalls(length: number): number[] {
-    const allNumbers: number[] = Array.from({ length: 36 }, (_, i) => i + 1);
+    const allNumbers: number[] = [...this.availableNumbers];
     const result: number[] = [];
 
     for (let i = 0; i < length; i++) {
