@@ -2,13 +2,40 @@
   display: flex;
 }
 
+::ng-deep .card-game {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 500px;
+  min-height: 550px;
+}
+
+.instruction {
+  font-size: 14px;
+  margin: 0 0 10px;
+  white-space: pre-line;
+}
+
+.instruction::first-letter {
+  all: unset;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
 .row {
   display: flex;
+  justify-content: space-between;
 }
 
 .balls-row {
   display: flex;
   justify-content: space-between;
+  gap: 5px;
 }
 
 .balls-grid {

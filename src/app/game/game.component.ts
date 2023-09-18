@@ -1,3 +1,10 @@
+import {
+  trigger,
+  transition,
+  style,
+  animate,
+  state,
+} from '@angular/animations';
 import { Component } from '@angular/core';
 import { BallsService } from 'src/services/balls.service';
 
@@ -5,6 +12,17 @@ import { BallsService } from 'src/services/balls.service';
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css'],
+  animations: [
+    trigger('buttonChange', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('300ms ease-in-out', style({ opacity: 1 })),
+      ]),
+      transition(':leave', [
+        animate('300ms ease-in-out', style({ opacity: 0 })),
+      ]),
+    ]),
+  ],
 })
 export class GameComponent {
   protected _showModal = false;

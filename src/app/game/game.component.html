@@ -1,23 +1,32 @@
 <div class="game">
-	<app-card [elemStyles]="{width: '500px'}">
-		<div class="row" *ngFor="let combination of _ballsService.playerCombinations; let i = index">
-			<div class="balls-row" (click)="_onModalOpen(i)">
-				<ng-container *ngIf="combination.length; else fallbackBalls">
-					<app-ball *ngFor="let ball of combination">{{ball}}</app-ball>
-				</ng-container>
+	<app-card [elemClasses]="'card-game'">
+		<p class="instruction">
+			To add combinations, use "+" buttons or "Autoselect".
+			<br />
+			Choose 5 numbers for each combination.
+		</p>
+		<div class="container">
+			<div class="row" *ngFor="let combination of _ballsService.playerCombinations; let i = index">
+				<div class="balls-row" (click)="_onModalOpen(i)">
+					<ng-container *ngIf="combination.length; else fallbackBalls">
+						<app-ball *ngFor="let ball of combination">{{ball}}</app-ball>
+					</ng-container>
 
-				<ng-template #fallbackBalls>
-					<app-ball *ngFor="let _ of [].constructor(5)">+</app-ball>
+					<ng-template #fallbackBalls>
+						<app-ball *ngFor="let _ of [].constructor(5)">+</app-ball>
+					</ng-template>
+				</div>
+				<app-button *ngIf="!combination.length; else removeButton" (onClick)="_autoselect(i)"
+					[customClass]="'primary'" [@buttonChange]>
+					Autoselect
+				</app-button>
+
+				<ng-template #removeButton>
+					<app-button (onClick)="_remove(i)" [customClass]="'danger'" [@buttonChange]>
+						Remove
+					</app-button>
 				</ng-template>
 			</div>
-			<app-button *ngIf="!combination.length; else deleteButton" (onClick)="_autoselect(i)"
-				[customClass]="'primary'">
-				Autoselect
-			</app-button>
-
-			<ng-template #deleteButton>
-				<app-button (onClick)="_remove(i)" [customClass]="'danger'">Remove</app-button>
-			</ng-template>
 		</div>
 	</app-card>
 
