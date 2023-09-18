@@ -38,8 +38,17 @@ export class GameComponent {
     ];
   }
 
-  protected _onModalClose(): void {
+  protected _closeModal(): void {
     this._showModal = false;
+    this._ballsService.bufferCombination = [];
+    this._modalRowIndex = null;
+  }
+
+  protected _onClear(): void {
+    this._ballsService.bufferCombination = [];
+  }
+
+  protected _onPlay(): void {
     if (
       this._ballsService.bufferCombination.length === 5 &&
       this._modalRowIndex !== null
@@ -49,8 +58,7 @@ export class GameComponent {
         this._modalRowIndex
       );
     }
-    this._ballsService.bufferCombination = [];
-    this._modalRowIndex = null;
+    this._closeModal();
   }
 
   protected _chooseBallType(ball: number): {

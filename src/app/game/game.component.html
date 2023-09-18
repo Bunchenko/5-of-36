@@ -32,12 +32,23 @@
 
 	<app-card [elemStyles]="{width: '200px'}"></app-card>
 
-	<app-modal [isOpened]="_showModal" [title]="'Choose 5 numbers'" (closed)="_onModalClose()">
-		<div class="balls-grid">
-			<app-ball [type]="_chooseBallType(ball).type" [isDisabled]="_chooseBallType(ball).disabled"
-				*ngFor="let ball of _ballsService.availableNumbers" (ballClick)="_onBallClick(ball)">
-				{{ball}}
-			</app-ball>
+	<app-modal [isOpened]="_showModal" [title]="'Choose 5 numbers'" (closed)="_closeModal()">
+		<div class="container-modal">
+			<div class="balls-grid">
+				<app-ball [type]="_chooseBallType(ball).type" [isDisabled]="_chooseBallType(ball).disabled"
+					*ngFor="let ball of _ballsService.availableNumbers" (ballClick)="_onBallClick(ball)">
+					{{ball}}
+				</app-ball>
+			</div>
+
+			<div class="buttons-modal">
+				<app-button *ngIf="_ballsService.bufferCombination.length" (onClick)="_onClear()">
+					Clear all
+				</app-button>
+				<app-button [isDisabled]="_ballsService.bufferCombination.length !== 5" (onClick)="_onPlay()">
+					Play
+				</app-button>
+			</div>
 		</div>
 	</app-modal>
 </div>

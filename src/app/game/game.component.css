@@ -38,8 +38,22 @@
   gap: 5px;
 }
 
-.balls-grid {
-  display: grid;
+.container-modal {
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  grid-template-columns: repeat(10, 50px);
+}
+
+.balls-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.buttons-modal {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
