@@ -21,6 +21,11 @@ button:hover {
   color: #fffffe;
 }
 
+button:disabled:hover {
+  cursor: not-allowed;
+  background-color: #ccc;
+}
+
 .secondary {
   background-color: #e46b2a;
   color: #fff;

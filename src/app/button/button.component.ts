@@ -8,5 +8,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class ButtonComponent {
   @Input() customClass?: 'primary' | 'secondary' | 'danger';
   @Input() customStyles: { [key: string]: string } = {};
+  @Input() isDisabled: boolean = false;
   @Output() onClick = new EventEmitter<MouseEvent>();
 }
