@@ -3,6 +3,12 @@
 }
 
 body {
+  height: 100vh;
+  margin: 0;
+  padding: 5px;
+}
+
+body {
   font-family: "Montserrat", sans-serif;
 }
 
