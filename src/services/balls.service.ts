@@ -56,6 +56,12 @@ export class BallsService {
     );
   }
 
+  public getPlayerCombinationsAmount(): number {
+    return this.playerCombinations.filter(
+      (combination) => combination.length === 5
+    ).length;
+  }
+
   private _countMatchAmount(): Combination[] | null {
     if (this.arePlayerCombinationsEmpty()) return null;
 
