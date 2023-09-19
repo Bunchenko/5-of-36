@@ -1,5 +1,5 @@
 <app-toast></app-toast>
-<nav>
+<nav class="margin">
 	<app-button [routerLink]="'/game'">
 		Game
 	</app-button>
@@ -8,7 +8,11 @@
 	</app-button>
 </nav>
 
-<app-card [elemStyles]="{display: 'flex', alignItems: 'center', flexDirection: 'column'}">
-	<div class="time">{{(drawingService.time$ | async) ?? 0 | mmss}}</div>
-</app-card>
-<router-outlet></router-outlet>
+<div class="margin">
+	<app-card [elemStyles]="{display: 'flex', alignItems: 'center', flexDirection: 'column'}">
+		<div class="time">{{(drawingService.time$ | async) ?? 0 | mmss}}</div>
+	</app-card>
+</div>
+<div class="container">
+	<router-outlet></router-outlet>
+</div>

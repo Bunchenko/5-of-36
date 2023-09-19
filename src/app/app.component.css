@@ -12,3 +12,20 @@
   font-size: 30px;
   line-height: 37px;
 }
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.margin {
+  margin-bottom: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+}
