@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { GameComponent } from './game/game.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { CardComponent } from './card/card.component';
-import { DropdownComponent } from './dropdown/dropdown.component';
 import { TotalComponent } from './total/total.component';
 import { ButtonComponent } from './button/button.component';
 import { DrawingComponent } from './drawing/drawing.component';
@@ -22,7 +21,6 @@ import { ModalComponent } from './modal/modal.component';
     GameComponent,
     CheckoutComponent,
     CardComponent,
-    DropdownComponent,
     TotalComponent,
     ButtonComponent,
     DrawingComponent,
