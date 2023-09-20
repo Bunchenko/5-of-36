@@ -1,1 +1,20 @@
-<p>checkout works!</p>
+<form class="checkout-form">
+	<ul>
+		<li>
+			<span>Combination price</span>
+			<span>{{2 | currency}}</span>
+		</li>
+		<li>
+			<span>Combinations amount</span>
+			<span>{{_ballsService.getPlayerCombinationsAmount()}}</span>
+		</li>
+		<hr>
+		<li>
+			<span>Total price</span>
+			<span>{{2 * _ballsService.getPlayerCombinationsAmount() | currency}}</span>
+		</li>
+	</ul>
+	<div class="buy">
+		<app-button [isDisabled]="_ballsService.getPlayerCombinationsAmount() === 0">Buy now</app-button>
+	</div>
+</form>
