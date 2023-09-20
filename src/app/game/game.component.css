@@ -1,5 +1,8 @@
 .game {
+  width: 100%;
   display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 ::ng-deep .card-game {
@@ -56,4 +59,9 @@
   display: flex;
   justify-content: center;
   gap: 20px;
+}
+
+::ng-deep .checkout {
+  min-width: 400px;
+  max-width: 450px;
 }
