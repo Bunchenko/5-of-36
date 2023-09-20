@@ -10,7 +10,8 @@
 
 
 <h2>Winning combination:</h2>
-<div class="balls-container" *ngIf="(_ballsService.winCombination$ | async)?.length; else notAnnounced">
+<div class="balls-container" *ngIf="(_ballsService.winCombination$ | async)?.length; else notAnnounced"
+	[@combinationSpin]>
 	<ng-container
 		*ngFor="let ball of _ballsService.winCombination$ | async; let isLast = last; trackBy: _trackByBallFn">
 		<app-ball class="ball" [type]="isLast ? 'bonus' : 'normal'">
