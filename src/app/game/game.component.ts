@@ -3,10 +3,12 @@ import {
   transition,
   style,
   animate,
-  state,
+  useAnimation,
+  query,
 } from '@angular/animations';
 import { Component } from '@angular/core';
 import { BallsService } from 'src/services/balls.service';
+import { ballsCombinationSpin } from '../animations';
 
 @Component({
   selector: 'app-game',
@@ -20,6 +22,27 @@ import { BallsService } from 'src/services/balls.service';
       ]),
       transition(':leave', [
         animate('300ms ease-in-out', style({ opacity: 0 })),
+      ]),
+    ]),
+    trigger('combinationSpin', [
+      transition('* <=> *', [
+        query(
+          ':enter',
+          [
+            useAnimation(ballsCombinationSpin, {
+              params: {
+                opacityFrom: 0,
+                opacityTo: 1,
+                staggerTime: '500',
+                animateTime: '500ms',
+                rotateAngle: '720deg',
+              },
+            }),
+          ],
+          {
+            optional: true,
+          }
+        ),
       ]),
     ]),
   ],

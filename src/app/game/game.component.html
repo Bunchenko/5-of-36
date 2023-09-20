@@ -7,7 +7,7 @@
 		</p>
 		<div class="container">
 			<div class="row" *ngFor="let combination of _ballsService.playerCombinations; let i = index">
-				<div class="balls-row" (click)="_onModalOpen(i)">
+				<div class="balls-row" (click)="_onModalOpen(i)" [@combinationSpin]>
 					<ng-container *ngIf="combination.length; else fallbackBalls">
 						<app-ball *ngFor="let ball of combination">{{ball}}</app-ball>
 					</ng-container>
