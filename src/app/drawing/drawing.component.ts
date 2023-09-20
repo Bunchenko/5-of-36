@@ -1,15 +1,9 @@
-import {
-  trigger,
-  transition,
-  query,
-  stagger,
-  animate,
-  style,
-} from '@angular/animations';
+import { trigger, transition, query, useAnimation } from '@angular/animations';
 import { Component } from '@angular/core';
 import { BallsService } from 'src/services/balls.service';
 import { DrawingService } from 'src/services/drawing.service';
 import { PrizeService } from 'src/services/prize.service';
+import { ballsCombinationSpin } from '../animations';
 
 @Component({
   selector: 'app-drawing',
@@ -21,15 +15,19 @@ import { PrizeService } from 'src/services/prize.service';
         query(
           ':enter',
           [
-            style({ opacity: 0 }),
-            stagger(500, [
-              animate(
-                '500ms ease-in-out',
-                style({ transform: 'rotate(720deg)', opacity: 1 })
-              ),
-            ]),
+            useAnimation(ballsCombinationSpin, {
+              params: {
+                opacityFrom: 0,
+                opacityTo: 1,
+                staggerTime: '500',
+                animateTime: '500ms',
+                rotateAngle: '720deg',
+              },
+            }),
           ],
-          { optional: true }
+          {
+            optional: true,
+          }
         ),
       ]),
     ]),
