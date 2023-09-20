@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Combination } from 'src/types/combination';
 import { PrizeService } from './prize.service';
 import { DrawingService } from './drawing.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class BallsService {
+export class BallsService implements OnDestroy {
   public availableNumbers: number[] = Array.from(
     { length: 36 },
     (_, i) => i + 1
@@ -15,12 +15,13 @@ export class BallsService {
   public playerCombinations: number[][] = [[], [], [], [], [], [], [], []];
   public winCombination$ = new BehaviorSubject<number[]>([]);
   public bufferCombination: number[] = [];
+  private _timerSubscription?: Subscription;
 
   constructor(
     private _prizeService: PrizeService,
     private _drawingService: DrawingService
   ) {
-    _drawingService.timer$.subscribe({
+    this._timerSubscription = _drawingService.timer$.subscribe({
       complete: () => {
         this.winCombination$.next(this.randomizeBalls(6));
         const combinations = this._countMatchAmount();
@@ -62,6 +63,10 @@ export class BallsService {
     ).length;
   }
 
+  public isBallInWinCombination(ball: number): boolean {
+    return this.winCombination$.value.includes(ball);
+  }
+
   private _countMatchAmount(): Combination[] | null {
     if (this.arePlayerCombinationsEmpty()) return null;
 
@@ -84,5 +89,12 @@ export class BallsService {
     });
 
     return combinations;
+  }
+
+  ngOnDestroy(): void {
+    if (this._timerSubscription) {
+      this._timerSubscription.unsubscribe();
+    }
+    this.winCombination$.complete();
   }
 }

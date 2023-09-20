@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, interval, Subject, BehaviorSubject } from 'rxjs';
 import {
   take,
@@ -12,7 +12,7 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class DrawingService {
+export class DrawingService implements OnDestroy {
   public timer$: Observable<number>;
   public complete$ = new Subject<boolean>();
   public time$ = new BehaviorSubject<number>(0);
@@ -31,5 +31,11 @@ export class DrawingService {
         this.time$.next(0);
       })
     );
+  }
+
+  ngOnDestroy(): void {
+    this.time$.complete();
+    this.complete$.complete();
+    this.time$.complete();
   }
 }

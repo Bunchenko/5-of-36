@@ -1,11 +1,11 @@
 import { BehaviorSubject, Subject } from 'rxjs';
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Combination } from 'src/types/combination';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PrizeService {
+export class PrizeService implements OnDestroy {
   public prizes$ = new BehaviorSubject<number | null>(null);
   private _prizePool = 1000000;
 
@@ -51,5 +51,9 @@ export class PrizeService {
       default:
         return 0;
     }
+  }
+
+  ngOnDestroy(): void {
+    this.prizes$.complete();
   }
 }
