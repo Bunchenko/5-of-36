@@ -1,10 +1,13 @@
-<app-button [customClass]="'primary'" (click)="_stopDrawing()">Stop</app-button>
+<app-button customClass='primary' (click)="_stopDrawing()">Stop</app-button>
 
 <h2>Your combinations:</h2>
 <ng-container *ngIf="!_ballsService.arePlayerCombinationsEmpty(); else combinationsEmpty">
 	<div class="balls-container"
 		*ngFor="let combinations of _ballsService.playerCombinations; trackBy: _trackByCombinationFn">
-		<app-ball class="ball" *ngFor="let ball of combinations; trackBy: _trackByBallFn">{{ball}}</app-ball>
+		<app-ball class="ball" *ngFor="let ball of combinations; trackBy: _trackByBallFn"
+			[type]="_ballsService.isBallInWinCombination(ball) ? 'bonus' : 'normal'">
+			{{ball}}
+		</app-ball>
 	</div>
 </ng-container>
 
