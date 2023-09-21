@@ -6,15 +6,15 @@
 		</li>
 		<li>
 			<span>Combinations amount</span>
-			<span>{{_ballsService.getPlayerCombinationsAmount()}}</span>
+			<span>{{getCombinationsAmount}}</span>
 		</li>
 		<hr>
 		<li>
 			<span>Total price</span>
-			<span>{{2 * _ballsService.getPlayerCombinationsAmount() | currency}}</span>
+			<span>{{2 * getCombinationsAmount | currency}}</span>
 		</li>
 	</ul>
 	<div class="buy">
-		<app-button [isDisabled]="_ballsService.getPlayerCombinationsAmount() === 0">Buy now</app-button>
+		<app-button [isDisabled]="!getCombinationsAmount">Buy now</app-button>
 	</div>
 </form>
