@@ -24,9 +24,15 @@
 </div>
 
 <h2>Your prize:</h2>
-<ng-container *ngIf="(_prizeService.prizes$ | async) !== null as prize; else wait">
-	<p>{{(_prizeService.prizes$ | async) | currency}}</p>
+<ng-container *ngIf="(_prizeService.prizes$ | async) === null; else prize">
+	<ng-container *ngIf="(_drawingService.complete$ | async) === true; else wait">
+		<p>You missed this drawing! Play next time!</p>
+	</ng-container>
 </ng-container>
+
+<ng-template #prize>
+	<p>{{(_prizeService.prizes$ | async) | currency}}</p>
+</ng-template>
 
 <ng-template #notAnnounced>
 	<p>The winning combination is not announced yet!</p>

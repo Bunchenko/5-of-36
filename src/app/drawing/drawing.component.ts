@@ -35,7 +35,7 @@ import { ballsCombinationSpin } from '../animations';
 })
 export class DrawingComponent {
   constructor(
-    private _drawingService: DrawingService,
+    protected _drawingService: DrawingService,
     protected _ballsService: BallsService,
     protected _prizeService: PrizeService
   ) {}
