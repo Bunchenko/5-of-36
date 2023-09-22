@@ -1,3 +1,4 @@
-<button [class]="customClass" [ngStyle]="customStyles" (click)="onClick.emit($event)" [disabled]="isDisabled">
+<button [class]="customClass" [ngStyle]="customStyles" (click)="onClick.emit($event)" [disabled]="isDisabled"
+	[routerLinkActive]="routerLinkActive">
 	<ng-content></ng-content>
 </button>

@@ -16,5 +16,6 @@ export class ButtonComponent {
   @Input() customClass?: 'primary' | 'secondary' | 'danger';
   @Input() customStyles: { [key: string]: string } = {};
   @Input() isDisabled: boolean = false;
+  @Input() routerLinkActive!: 'link-active';
   @Output() onClick = new EventEmitter<MouseEvent>();
 }
