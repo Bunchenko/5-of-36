@@ -21,10 +21,10 @@ export class DrawingService implements OnDestroy {
   constructor() {
     this.timer$ = interval(1000).pipe(
       shareReplay(1),
-      tap((v) => {
+      tap(v => {
         this.time$.next(this._seconds - v);
       }),
-      map((v) => this._seconds - v),
+      map(v => this._seconds - v),
       takeUntil(this.complete$),
       take(this._seconds + 1),
       finalize(() => {

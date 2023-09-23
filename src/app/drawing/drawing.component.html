@@ -1,47 +1,59 @@
-<app-button customClass='primary' (click)="_stopDrawing()">Stop</app-button>
+<app-button customClass="primary" (click)="_stopDrawing()">Stop</app-button>
 
 <h2>Your combinations:</h2>
-<ng-container *ngIf="!_ballsService.arePlayerCombinationsEmpty(); else combinationsEmpty">
-	<div class="balls-container"
-		*ngFor="let combinations of _ballsService.playerCombinations; trackBy: _trackByCombinationFn">
-		<app-ball class="ball" *ngFor="let ball of combinations; trackBy: _trackByBallFn"
-			[type]="_ballsService.isBallInWinCombination(ball) ? 'bonus' : 'normal'">
-			{{ball}}
-		</app-ball>
-	</div>
+<ng-container
+  *ngIf="!_ballsService.arePlayerCombinationsEmpty(); else combinationsEmpty">
+  <div
+    class="balls-container"
+    *ngFor="
+      let combinations of _ballsService.playerCombinations;
+      trackBy: _trackByCombinationFn
+    ">
+    <app-ball
+      class="ball"
+      *ngFor="let ball of combinations; trackBy: _trackByBallFn"
+      [type]="_ballsService.isBallInWinCombination(ball) ? 'bonus' : 'normal'">
+      {{ ball }}
+    </app-ball>
+  </div>
 </ng-container>
 
-
 <h2>Winning combination:</h2>
-<div class="balls-container" *ngIf="(_ballsService.winCombination$ | async)?.length; else notAnnounced"
-	[@combinationSpin]>
-	<ng-container
-		*ngFor="let ball of _ballsService.winCombination$ | async; let isLast = last; trackBy: _trackByBallFn">
-		<app-ball class="ball" [type]="isLast ? 'bonus' : 'normal'">
-			{{ball}}
-		</app-ball>
-	</ng-container>
+<div
+  class="balls-container"
+  *ngIf="(_ballsService.winCombination$ | async)?.length; else notAnnounced"
+  [@combinationSpin]>
+  <ng-container
+    *ngFor="
+      let ball of _ballsService.winCombination$ | async;
+      let isLast = last;
+      trackBy: _trackByBallFn
+    ">
+    <app-ball class="ball" [type]="isLast ? 'bonus' : 'normal'">
+      {{ ball }}
+    </app-ball>
+  </ng-container>
 </div>
 
 <h2>Your prize:</h2>
 <ng-container *ngIf="(_prizeService.prizes$ | async) === null; else prize">
-	<ng-container *ngIf="(_drawingService.complete$ | async) === true; else wait">
-		<p>You missed this drawing! Play next time!</p>
-	</ng-container>
+  <ng-container *ngIf="(_drawingService.complete$ | async) === true; else wait">
+    <p>You missed this drawing! Play next time!</p>
+  </ng-container>
 </ng-container>
 
 <ng-template #prize>
-	<p>{{(_prizeService.prizes$ | async) | currency}}</p>
+  <p>{{ _prizeService.prizes$ | async | currency }}</p>
 </ng-template>
 
 <ng-template #notAnnounced>
-	<p>The winning combination is not announced yet!</p>
+  <p>The winning combination is not announced yet!</p>
 </ng-template>
 
 <ng-template #wait>
-	<p>Wait until the winning combination is announced!</p>
+  <p>Wait until the winning combination is announced!</p>
 </ng-template>
 
 <ng-template #combinationsEmpty>
-	<p>Choose your combinations to join the game!</p>
+  <p>Choose your combinations to join the game!</p>
 </ng-template>

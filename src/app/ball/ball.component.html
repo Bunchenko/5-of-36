@@ -1,4 +1,7 @@
-<button [class]="_defineBallClass()" [disabled]="isDisabled" (click)="_handleClick()"
-	[@spin]="isSelected? 'selected' : 'deselected'">
-	<ng-content></ng-content>
+<button
+  [class]="_defineBallClass()"
+  [disabled]="isDisabled"
+  (click)="_handleClick()"
+  [@spin]="isSelected ? 'selected' : 'deselected'">
+  <ng-content></ng-content>
 </button>

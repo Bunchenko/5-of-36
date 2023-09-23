@@ -53,13 +53,13 @@ export class BallsService implements OnDestroy {
 
   public arePlayerCombinationsEmpty(): boolean {
     return this.playerCombinations.every(
-      (combination) => combination.length === 0
+      combination => combination.length === 0
     );
   }
 
   public getPlayerCombinationsAmount(): number {
     return this.playerCombinations.filter(
-      (combination) => combination.length === 5
+      combination => combination.length === 5
     ).length;
   }
 
@@ -73,7 +73,7 @@ export class BallsService implements OnDestroy {
     const winCombination = [...this.winCombination$.value];
     const bonusBall = winCombination.pop();
 
-    const combinations = this.playerCombinations.map((playerCombination) => {
+    const combinations = this.playerCombinations.map(playerCombination => {
       let matchCount = 0;
       let hasBonus = false;
 

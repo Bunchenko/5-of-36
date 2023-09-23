@@ -36,7 +36,9 @@
 }
 
 .lotto-ball:focus {
-  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #ac8f60;
+  box-shadow:
+    0 0 0 2px #ffffff,
+    0 0 0 4px #ac8f60;
 }
 
 .lotto-ball:disabled {

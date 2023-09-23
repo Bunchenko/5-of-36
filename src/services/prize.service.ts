@@ -14,7 +14,7 @@ export class PrizeService implements OnDestroy {
 
     let totalWin = 0;
 
-    combinations.forEach((combination) => {
+    combinations.forEach(combination => {
       if (combination.hasBonus) {
         totalWin += this._calculateWithBonus(combination.matchCount);
       } else {

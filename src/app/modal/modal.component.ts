@@ -1,10 +1,4 @@
-import {
-  trigger,
-  style,
-  state,
-  transition,
-  animate,
-} from '@angular/animations';
+import { trigger, style, transition, animate } from '@angular/animations';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -22,8 +16,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   ],
 })
 export class ModalComponent {
-  @Input() title: string = '';
-  @Input() isOpened: boolean = false;
+  @Input() title = '';
+  @Input() isOpened = false;
   @Output()
   closed = new EventEmitter();
 

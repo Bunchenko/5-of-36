@@ -1,11 +1,14 @@
 <ng-container *ngIf="isOpened">
-	<div class="modal-overlay" (click)="_close()" [@open]="isOpened ? 'opened' : 'closed'">
-		<div class="modal-window" (click)="$event.stopPropagation()">
-			<div class="modal-header">
-				<h2>{{ title }}</h2>
-				<button (click)="_close()">x</button>
-			</div>
-			<ng-content></ng-content>
-		</div>
-	</div>
+  <div
+    class="modal-overlay"
+    (click)="_close()"
+    [@open]="isOpened ? 'opened' : 'closed'">
+    <div class="modal-window" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>{{ title }}</h2>
+        <button (click)="_close()">x</button>
+      </div>
+      <ng-content></ng-content>
+    </div>
+  </div>
 </ng-container>

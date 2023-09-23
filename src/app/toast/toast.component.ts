@@ -27,8 +27,8 @@ export class ToastComponent implements OnInit {
 
   ngOnInit() {
     this._prizeService.prizes$
-      .pipe(filter((v) => v !== null))
-      .subscribe((prize) => {
+      .pipe(filter(v => v !== null))
+      .subscribe(prize => {
         this.message = `You won: ${prize}$`;
         this._visible = true;
 

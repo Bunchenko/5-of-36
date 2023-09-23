@@ -1,20 +1,20 @@
 <form class="checkout-form" (submit)="$event.preventDefault()">
-	<ul>
-		<li>
-			<span>Combination price</span>
-			<span>{{2 | currency}}</span>
-		</li>
-		<li>
-			<span>Combinations amount</span>
-			<span>{{getCombinationsAmount}}</span>
-		</li>
-		<hr>
-		<li>
-			<span>Total price</span>
-			<span>{{2 * getCombinationsAmount | currency}}</span>
-		</li>
-	</ul>
-	<div class="buy">
-		<app-button [isDisabled]="!getCombinationsAmount">Buy now</app-button>
-	</div>
+  <ul>
+    <li>
+      <span>Combination price</span>
+      <span>{{ 2 | currency }}</span>
+    </li>
+    <li>
+      <span>Combinations amount</span>
+      <span>{{ getCombinationsAmount }}</span>
+    </li>
+    <hr />
+    <li>
+      <span>Total price</span>
+      <span>{{ 2 * getCombinationsAmount | currency }}</span>
+    </li>
+  </ul>
+  <div class="buy">
+    <app-button [isDisabled]="!getCombinationsAmount">Buy now</app-button>
+  </div>
 </form>
