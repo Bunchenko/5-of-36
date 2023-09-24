@@ -21,13 +21,24 @@ export class BallsService implements OnDestroy {
     private _prizeService: PrizeService,
     private _drawingService: DrawingService
   ) {
-    this._timerSubscription = _drawingService.timer$.subscribe({
-      complete: () => {
-        this.winCombination$.next(this.randomizeBalls(6));
-        const combinations = this._countMatchAmount();
-        _prizeService.countTotalPrize(combinations);
-      },
-    });
+    this._timerSubscription = _drawingService.startDrawing(
+      this._completeCallback.bind(this)
+    );
+  }
+
+  private _completeCallback(): void {
+    this.winCombination$.next(this.randomizeBalls(6));
+    const combinations = this._countMatchAmount();
+    this._prizeService.countTotalPrize(combinations);
+  }
+
+  public startNewDrawing() {
+    this._timerSubscription?.unsubscribe();
+    this.winCombination$.next([]);
+    this._prizeService.prizes$.next(null);
+    this._timerSubscription = this._drawingService.startDrawing(
+      this._completeCallback.bind(this)
+    );
   }
 
   public randomizeBalls(length: number): number[] {
@@ -77,7 +88,7 @@ export class BallsService implements OnDestroy {
       let matchCount = 0;
       let hasBonus = false;
 
-      for (let ball of playerCombination) {
+      for (const ball of playerCombination) {
         if (winCombination.includes(ball)) {
           matchCount++;
         } else if (!hasBonus && ball === bonusBall) {
@@ -92,9 +103,7 @@ export class BallsService implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this._timerSubscription) {
-      this._timerSubscription.unsubscribe();
-    }
+    this._timerSubscription?.unsubscribe();
     this.winCombination$.complete();
   }
 }

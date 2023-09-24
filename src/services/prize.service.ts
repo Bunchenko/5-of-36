@@ -1,4 +1,4 @@
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Combination } from 'src/types/combination';
 

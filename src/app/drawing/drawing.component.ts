@@ -40,8 +40,12 @@ export class DrawingComponent {
     protected _prizeService: PrizeService
   ) {}
 
-  protected _stopDrawing() {
-    this._drawingService.complete$.next(true);
+  protected _stopDrawing(): void {
+    this._drawingService.stopDrawing();
+  }
+
+  protected _startNewDrawing(): void {
+    this._ballsService.startNewDrawing();
   }
 
   protected _trackByCombinationFn(
