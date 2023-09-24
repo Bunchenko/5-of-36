@@ -36,6 +36,7 @@ export class BallsService implements OnDestroy {
     this._timerSubscription?.unsubscribe();
     this.winCombination$.next([]);
     this._prizeService.prizes$.next(null);
+    this._drawingService.complete$.next(false);
     this._timerSubscription = this._drawingService.startDrawing(
       this._completeCallback.bind(this)
     );
