@@ -23,7 +23,7 @@
         </div>
         <app-button
           *ngIf="!combination.length; else removeButton"
-          (onClick)="_autoselect(i)"
+          (clickEvent)="_autoselect(i)"
           customClass="primary"
           [@buttonChange]>
           Autoselect
@@ -31,7 +31,7 @@
 
         <ng-template #removeButton>
           <app-button
-            (onClick)="_remove(i)"
+            (clickEvent)="_remove(i)"
             customClass="danger"
             [@buttonChange]>
             Remove
@@ -64,12 +64,12 @@
     <div class="buttons-modal">
       <app-button
         *ngIf="_ballsService.bufferCombination.length"
-        (onClick)="_onClear()">
+        (clickEvent)="_onClear()">
         Clear all
       </app-button>
       <app-button
         [isDisabled]="_ballsService.bufferCombination.length !== 5"
-        (onClick)="_onPlay()">
+        (clickEvent)="_onPlay()">
         Play
       </app-button>
     </div>

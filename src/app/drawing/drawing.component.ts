@@ -48,10 +48,7 @@ export class DrawingComponent {
     this._ballsService.startNewDrawing();
   }
 
-  protected _trackByCombinationFn(
-    index: number,
-    combination: number[]
-  ): number {
+  protected _trackByCombinationFn(index: number): number {
     return index;
   }
 
