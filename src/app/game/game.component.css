@@ -45,12 +45,14 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
 }
 
 .balls-grid {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  max-width: 450px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  place-items: center;
   gap: 5px;
   margin-bottom: 20px;
 }
