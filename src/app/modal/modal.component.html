@@ -2,8 +2,16 @@
   <div
     class="modal-overlay"
     (click)="_close()"
+    (keydown.enter)="_close()"
+    role="button"
+    tabindex="0"
     [@open]="isOpened ? 'opened' : 'closed'">
-    <div class="modal-window" (click)="$event.stopPropagation()">
+    <div
+      class="modal-window"
+      (click)="$event.stopPropagation()"
+      (keydown.enter)="$event.stopPropagation()"
+      role="button"
+      tabindex="0">
       <div class="modal-header">
         <h2>{{ title }}</h2>
         <button (click)="_close()">x</button>

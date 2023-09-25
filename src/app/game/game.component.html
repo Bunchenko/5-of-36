@@ -12,7 +12,13 @@
           let combination of _ballsService.playerCombinations;
           let i = index
         ">
-        <div class="balls-row" (click)="_onModalOpen(i)" [@combinationSpin]>
+        <div
+          class="balls-row"
+          (click)="_onModalOpen(i)"
+          (keydown.enter)="_onModalOpen(i)"
+          role="button"
+          tabindex="0"
+          [@combinationSpin]>
           <ng-container *ngIf="combination.length; else fallbackBalls">
             <app-ball *ngFor="let ball of combination">{{ ball }}</app-ball>
           </ng-container>
