@@ -6,9 +6,16 @@ import {
   useAnimation,
   query,
 } from '@angular/animations';
-import { Component } from '@angular/core';
+import {
+  Component,
+  ComponentRef,
+  ViewChild,
+  ViewContainerRef,
+  TemplateRef,
+} from '@angular/core';
 import { BallsService } from 'src/services/balls.service';
 import { ballsCombinationSpin } from '../animations';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-game',
@@ -48,21 +55,35 @@ import { ballsCombinationSpin } from '../animations';
   ],
 })
 export class GameComponent {
-  protected _showModal = false;
   protected _modalRowIndex: number | null = null;
+
+  @ViewChild('modalContent', { static: true }) modalContent!: TemplateRef<any>;
+
+  @ViewChild('modal', { read: ViewContainerRef })
+  private viewRef!: ViewContainerRef;
+  private componentRef!: ComponentRef<ModalComponent>;
 
   constructor(protected _ballsService: BallsService) {}
 
-  protected _onModalOpen(index: number): void {
-    this._showModal = true;
+  openModal(index: number): void {
     this._modalRowIndex = index;
     this._ballsService.bufferCombination = [
       ...this._ballsService.playerCombinations[index],
     ];
+
+    this.viewRef.clear();
+    this.componentRef = this.viewRef.createComponent(ModalComponent);
+
+    const modalInstance = this.componentRef.instance;
+    modalInstance.contentTemplate = this.modalContent;
+    modalInstance.title = 'Choose 5 numbers';
+    modalInstance.closed.subscribe(() => {
+      this.closeModal();
+    });
   }
 
-  protected _closeModal(): void {
-    this._showModal = false;
+  closeModal(): void {
+    this.viewRef.clear();
     this._ballsService.bufferCombination = [];
     this._modalRowIndex = null;
   }
@@ -81,7 +102,7 @@ export class GameComponent {
         this._modalRowIndex
       );
     }
-    this._closeModal();
+    this.closeModal();
   }
 
   protected _chooseBallType(ball: number): {

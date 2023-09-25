@@ -1,11 +1,10 @@
 <div
-  *ngIf="isOpened"
   class="modal-overlay"
   (click)="_close()"
   (keydown.enter)="_close()"
   role="button"
   tabindex="0"
-  [@open]="isOpened ? 'opened' : 'closed'">
+  [@open]>
   <div
     class="modal-window"
     (click)="$event.stopPropagation()"
@@ -16,6 +15,6 @@
       <h2>{{ title }}</h2>
       <button (click)="_close()">x</button>
     </div>
-    <ng-content></ng-content>
+    <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
   </div>
 </div>

@@ -1,4 +1,4 @@
-<div class="game">
+<div class="game" #modal>
   <app-card elemClasses="card-game">
     <p class="instruction">
       To add combinations, use "+" buttons or "Autoselect".
@@ -14,8 +14,8 @@
         ">
         <div
           class="balls-row"
-          (click)="_onModalOpen(i)"
-          (keydown.enter)="_onModalOpen(i)"
+          (click)="openModal(i)"
+          (keydown.enter)="openModal(i)"
           role="button"
           tabindex="0"
           [@combinationSpin]>
@@ -52,10 +52,7 @@
   </app-card>
 </div>
 
-<app-modal
-  [isOpened]="_showModal"
-  title="Choose 5 numbers"
-  (closed)="_closeModal()">
+<ng-template #modalContent>
   <div class="container-modal">
     <div class="balls-grid">
       <app-ball
@@ -80,4 +77,4 @@
       </app-button>
     </div>
   </div>
-</app-modal>
+</ng-template>

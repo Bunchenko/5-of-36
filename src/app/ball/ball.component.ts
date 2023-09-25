@@ -29,8 +29,8 @@ import {
 })
 export class BallComponent {
   @Input() type: 'normal' | 'bonus' = 'normal';
-  @Input() isDisabled: boolean = false;
-  @Input() isSelected: boolean = false;
+  @Input() isDisabled = false;
+  @Input() isSelected = false;
   @Output() ballClick = new EventEmitter<void>();
 
   protected _handleClick() {

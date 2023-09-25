@@ -1,5 +1,11 @@
 import { trigger, style, transition, animate } from '@angular/animations';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  TemplateRef,
+} from '@angular/core';
 
 @Component({
   selector: 'app-modal',
@@ -16,10 +22,9 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   ],
 })
 export class ModalComponent {
+  @Input() contentTemplate!: TemplateRef<any>;
   @Input() title = '';
-  @Input() isOpened = false;
-  @Output()
-  closed = new EventEmitter();
+  @Output() closed = new EventEmitter();
 
   protected _close() {
     this.closed.emit();
