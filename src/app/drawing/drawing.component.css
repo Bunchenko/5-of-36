@@ -8,6 +8,13 @@
   margin-right: 5px;
 }
 
+.buttons-container {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
 .balls-container {
   display: flex;
 }
