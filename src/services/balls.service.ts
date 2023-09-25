@@ -103,7 +103,7 @@ export class BallsService implements OnDestroy {
     return combinations;
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this._timerSubscription?.unsubscribe();
     this.winCombination$.complete();
   }

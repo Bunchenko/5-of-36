@@ -6,7 +6,7 @@ import {
   BehaviorSubject,
   Subscription,
 } from 'rxjs';
-import { take, takeUntil, map, tap, finalize } from 'rxjs/operators';
+import { take, takeUntil, tap, finalize } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -38,7 +38,7 @@ export class DrawingService implements OnDestroy {
     this.complete$.next(true);
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.time$.complete();
     this.complete$.complete();
   }

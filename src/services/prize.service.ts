@@ -16,16 +16,16 @@ export class PrizeService implements OnDestroy {
 
     combinations.forEach(combination => {
       if (combination.hasBonus) {
-        totalWin += this._calculateWithBonus(combination.matchCount);
+        totalWin += this.calculateWithBonus(combination.matchCount);
       } else {
-        totalWin += this._calculateWithoutBonus(combination.matchCount);
+        totalWin += this.calculateWithoutBonus(combination.matchCount);
       }
     });
 
     this.prizes$.next(totalWin);
   }
 
-  private _calculateWithBonus(matchCount: number) {
+  private calculateWithBonus(matchCount: number): number {
     switch (matchCount) {
       case 2:
         return Math.round(this._prizePool * 0.2);
@@ -38,7 +38,7 @@ export class PrizeService implements OnDestroy {
     }
   }
 
-  private _calculateWithoutBonus(matchCount: number) {
+  private calculateWithoutBonus(matchCount: number): number {
     switch (matchCount) {
       case 2:
         return Math.round(this._prizePool * 0.1);
@@ -53,7 +53,7 @@ export class PrizeService implements OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.prizes$.complete();
   }
 }

@@ -15,17 +15,17 @@ import { PrizeService } from 'src/services/prize.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToastComponent implements OnInit {
-  @Input() message: string = '';
-  @Input() duration: number = 3000;
+  @Input() message = '';
+  @Input() duration = 3000;
 
-  protected _visible: boolean = false;
+  protected _visible = false;
 
   constructor(
     private _prizeService: PrizeService,
     private _cd: ChangeDetectorRef
   ) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     this._prizeService.prizes$
       .pipe(filter(v => v !== null))
       .subscribe(prize => {
