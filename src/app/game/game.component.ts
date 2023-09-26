@@ -65,7 +65,7 @@ export class GameComponent {
 
   constructor(protected _ballsService: BallsService) {}
 
-  openModal(index: number): void {
+  protected openModal(index: number): void {
     this._modalRowIndex = index;
     this._ballsService.bufferCombination = [
       ...this._ballsService.playerCombinations[index],
@@ -82,17 +82,17 @@ export class GameComponent {
     });
   }
 
-  closeModal(): void {
+  protected closeModal(): void {
     this.viewRef.clear();
     this._ballsService.bufferCombination = [];
     this._modalRowIndex = null;
   }
 
-  protected _onClear(): void {
+  protected onClear(): void {
     this._ballsService.bufferCombination = [];
   }
 
-  protected _onPlay(): void {
+  protected onPlay(): void {
     if (
       this._ballsService.bufferCombination.length === 5 &&
       this._modalRowIndex !== null

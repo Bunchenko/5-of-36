@@ -10,14 +10,15 @@
         class="row"
         *ngFor="
           let combination of _ballsService.playerCombinations;
-          let i = index
+          let i = index;
+          let isLast = last
         ">
         <div
           class="balls-row"
-          (click)="openModal(i)"
-          (keydown.enter)="openModal(i)"
-          role="button"
-          tabindex="0"
+          (click)="!isLast && openModal(i)"
+          (keydown.enter)="!isLast && openModal(i)"
+          [attr.role]="isLast ? null : 'button'"
+          [attr.tabindex]="isLast ? null : '0'"
           [@combinationSpin]>
           <ng-container *ngIf="combination.length; else fallbackBalls">
             <app-ball *ngFor="let ball of combination">{{ ball }}</app-ball>
@@ -31,6 +32,7 @@
           *ngIf="!combination.length; else removeButton"
           (clickEvent)="_autoselect(i)"
           customClass="primary"
+          [customStyles]="{ visibility: isLast ? 'hidden' : '' }"
           [@buttonChange]>
           Autoselect
         </app-button>
@@ -67,12 +69,12 @@
     <div class="buttons-modal">
       <app-button
         *ngIf="_ballsService.bufferCombination.length"
-        (clickEvent)="_onClear()">
+        (clickEvent)="onClear()">
         Clear all
       </app-button>
       <app-button
         [isDisabled]="_ballsService.bufferCombination.length !== 5"
-        (clickEvent)="_onPlay()">
+        (clickEvent)="onPlay()">
         Play
       </app-button>
     </div>

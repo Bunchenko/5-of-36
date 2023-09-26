@@ -12,10 +12,11 @@ export class BallsService implements OnDestroy {
     { length: 36 },
     (_, i) => i + 1
   );
-  public playerCombinations: number[][] = [[], [], [], [], [], [], [], []];
+  public playerCombinations: number[][] = [[], [], [], [], [], [], [], [], []];
   public winCombination$ = new BehaviorSubject<number[]>([]);
   public bufferCombination: number[] = [];
   private _timerSubscription?: Subscription;
+  private _popularBalls: { [key: string]: number } = {};
 
   constructor(
     private _prizeService: PrizeService,
@@ -24,12 +25,20 @@ export class BallsService implements OnDestroy {
     this._timerSubscription = _drawingService.startDrawing(
       this._completeCallback.bind(this)
     );
+    _drawingService.drawingStarted$.subscribe(() => {
+      this.addBalls(this.getPopularWinBalls(), 8);
+    });
   }
 
   private _completeCallback(): void {
     this.winCombination$.next(this.randomizeBalls(6));
+
     const combinations = this._countMatchAmount();
     this._prizeService.countTotalPrize(combinations);
+
+    this.winCombination$.value.forEach(ball => {
+      this._addBallToPopular(ball);
+    });
   }
 
   public startNewDrawing() {
@@ -40,6 +49,20 @@ export class BallsService implements OnDestroy {
     this._timerSubscription = this._drawingService.startDrawing(
       this._completeCallback.bind(this)
     );
+  }
+
+  private _addBallToPopular(ball: number): void {
+    if (!(ball in this._popularBalls)) {
+      this._popularBalls[ball] = 0;
+    }
+    this._popularBalls[ball]++;
+  }
+
+  public getPopularWinBalls(): number[] {
+    return Object.keys(this._popularBalls)
+      .map(v => Number(v))
+      .sort((a, b) => this._popularBalls[b] - this._popularBalls[a])
+      .slice(0, 5);
   }
 
   public randomizeBalls(length: number): number[] {
