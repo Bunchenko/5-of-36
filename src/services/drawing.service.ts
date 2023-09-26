@@ -15,6 +15,7 @@ export class DrawingService implements OnDestroy {
   public timer$: Observable<number>;
   public complete$ = new Subject<boolean>();
   public time$ = new BehaviorSubject<number>(0);
+  public drawingStarted$ = new Subject<boolean>();
   private _seconds = 60;
 
   constructor() {
@@ -31,6 +32,7 @@ export class DrawingService implements OnDestroy {
   }
 
   public startDrawing(completeCallback: () => void): Subscription {
+    this.drawingStarted$.next(true);
     return this.timer$.subscribe({ complete: completeCallback });
   }
 
@@ -41,5 +43,6 @@ export class DrawingService implements OnDestroy {
   public ngOnDestroy(): void {
     this.time$.complete();
     this.complete$.complete();
+    this.drawingStarted$.complete();
   }
 }
