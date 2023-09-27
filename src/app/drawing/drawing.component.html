@@ -19,7 +19,7 @@
     <app-ball
       class="ball"
       *ngFor="let ball of combinations; trackBy: _trackByBallFn"
-      [type]="_ballsService.isBallInWinCombination(ball) ? 'bonus' : 'normal'">
+      [type]="_highlightedBalls.has(ball) ? 'bonus' : 'normal'">
       {{ ball }}
     </app-ball>
   </div>
@@ -29,7 +29,8 @@
 <div
   class="balls-container"
   *ngIf="(_ballsService.winCombination$ | async)?.length; else notAnnounced"
-  [@combinationSpin]>
+  [@combinationSpin]
+  (@combinationSpin.done)="_onWinCombinationShow($event)">
   <ng-container
     *ngFor="
       let ball of _ballsService.winCombination$ | async;
@@ -50,7 +51,7 @@
 </ng-container>
 
 <ng-template #prize>
-  <p>{{ _prizeService.prizes$ | async | currency }}</p>
+  <p *ngIf="_showWinAmount">{{ _prizeService.prizes$ | async | currency }}</p>
 </ng-template>
 
 <ng-template #notAnnounced>
